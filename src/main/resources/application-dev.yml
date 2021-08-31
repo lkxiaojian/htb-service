@@ -1,0 +1,31 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    username: root
+    password: 123qazhtb
+    url: jdbc:mysql://39.99.226.230:3306/htb?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC&allowMultiQueries=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  web:
+    resources:
+      static-locations: classpath:/META-INF/resources/, classpath:/resources/, classpath:/static/, classpath:/public/, classpath:/templates/
+
+mybatis:
+  mapper-locations: classpath:mapping/*Mapper.xml
+  type-aliases-package: com.htb.api.entity
+
+#showSql
+
+logging:
+  level:
+    com:
+      htb:
+        api:
+          mapper : debug
+
+upload:
+    headpath: /home/file/htb/head/
+
+
+

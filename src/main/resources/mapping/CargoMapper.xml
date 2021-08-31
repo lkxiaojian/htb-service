@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.htb.api.mapper.CargoMapper">
+
+    <resultMap id="BaseResultMap" type="com.htb.api.entity.Cargo">
+        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="price" jdbcType="FLOAT" property="price" />
+        <result column="exp" jdbcType="DATE" property="exp" />
+        <result column="shortage" jdbcType="BOOLEAN" property="shortage" />
+    </resultMap>
+
+    <select id="selectCargoById" resultType="com.htb.api.entity.Cargo">
+        select * from t_cargo where id = #{id}
+    </select>
+
+    <select id="selectAllCargo" resultMap="BaseResultMap">
+        select * from t_cargo
+    </select>
+    
+    <insert id="addCargo" useGeneratedKeys="true" keyProperty="id">
+
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT CONVERT(LAST_INSERT_ID(),SIGNED) AS id
+        </selectKey>
+        insert into t_cargo (name, price, exp, shortage)
+        values(#{name}, #{price}, #{exp}, #{shortage});
+
+    </insert>
+
+    <update id="updateCargo">
+        update t_cargo
+        set ${attr} = #{newValue}
+        where id = #{id}
+    </update>
+
+    <update id="updateFullCargo">
+        update t_cargo
+        set name = #{name},
+            price = #{price},
+            exp = #{exp},
+            shortage = #{shortage}
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCargo">
+        DELETE FROM t_cargo
+        WHERE id = #{id}
+    </delete>
+
+
+
+</mapper>

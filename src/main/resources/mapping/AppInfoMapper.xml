@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.htb.api.mapper.AppInfoMapper">
+    <insert id="insertApp">
+        insert into app_info (version, createDate,name, updateInfo, type,url )
+        values(#{version},#{createDate}, #{name}, #{updateInfo}, #{type}, #{url});
+    </insert>
+
+    <select id="getAppInfo" resultType="com.htb.api.entity.AppInfo">
+        select * from app_info where type = #{type} order by createDate desc limit 0,1
+    </select>
+</mapper>
